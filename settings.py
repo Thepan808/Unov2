@@ -31,7 +31,7 @@ async def show_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if update.message.chat.type != "private":
         await send_async(
             chat,
-            text=_("Please edit your settings in a private chat with " "the bot."),
+            text=_("Edite suas configurações em um bate-papo privado com " "o bot."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -42,12 +42,12 @@ async def show_settings(update: Update, context: ContextTypes.DEFAULT_TYPE):
         us = UserSetting(id=update.message.from_user.id)
 
     stats = (
-        "❌" + " " + _("Delete all statistics")
+        "❌" + " " + _("Excluir todas as estatísticas")
         if us.stats
-        else "📊" + " " + _("Enable statistics")
+        else "📊" + " " + _("Habilitar estatísticas")
     )
 
-    kb = [[stats], ["🌍" + " " + _("Language")]]
+    kb = [[stats], ["🌍" + " " + _("Idioma")]]
     await send_async(
         chat,
         text="🔧" + " " + _("Settings"),
@@ -64,7 +64,7 @@ async def kb_select(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if option == "📊":
         us = UserSetting.get(id=user.id)
         us.stats = True
-        await send_async(chat, text=_("Enabled statistics!"))
+        await send_async(chat, text=_("Estatísticas habilitadas!"))
 
     elif option == "🌍":
         kb = [
@@ -74,7 +74,7 @@ async def kb_select(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await send_async(
             chat,
-            text=_("Select locale"),
+            text=_("Selecionar localidade"),
             reply_markup=ReplyKeyboardMarkup(keyboard=kb, one_time_keyboard=True),
         )
 
@@ -84,7 +84,7 @@ async def kb_select(update: Update, context: ContextTypes.DEFAULT_TYPE):
         us.first_places = 0
         us.games_played = 0
         us.cards_played = 0
-        await send_async(chat, text=_("Deleted and disabled statistics!"))
+        await send_async(chat, text=_("Estatísticas excluídas e desabilitadas!"))
 
 
 @user_locale
@@ -97,7 +97,7 @@ async def locale_select(update: Update, context: ContextTypes.DEFAULT_TYPE):
         us = UserSetting.get(id=user.id)
         us.lang = option
         _.push(option)
-        await send_async(chat, text=_("Set locale!"))
+        await send_async(chat, text=_("Definido localidade!"))
         _.pop()
 
 
