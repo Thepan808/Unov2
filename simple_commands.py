@@ -28,39 +28,39 @@ from utils import send_async
 async def help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler for the /help command"""
     help_text = _(
-        "Follow these steps:\n\n"
-        "1. Add this bot to a group\n"
-        "2. In the group, start a new game with /new or join an already"
-        " running game with /join\n"
-        "3. After at least two players have joined, start the game with"
+        "Siga estes passos:\n\n"
+        "1. Adicionar este bot a um grupo\n"
+        "2. No grupo, comece um novo jogo com /new ou junte-se a um já"
+        " jogo em execução com /join\n"
+        "3. Depois que pelo menos dois jogadores se juntarem, comece o jogo com"
         " /start\n"
-        "4. Type <code>@UnuRobot</code> into your chat box and hit "
-        "<b>space</b>, or click the <code>via @UnuRobot</code> text "
-        "next to messages. You will see your cards (some greyed out), "
-        "any extra options like drawing, and a <b>?</b> to see the "
-        "current game state. The <b>greyed out cards</b> are those you "
-        "<b>can not play</b> at the moment. Tap an option to execute "
-        "the selected action.\n"
-        "Players can join the game at any time. To leave a game, "
-        "use /leave. If a player takes more than 90 seconds to play, "
-        "you can use /skip to skip that player. Use /notify_me to "
-        "receive a private message when a new game is started.\n\n"
-        "<b>Language</b> and other settings: /settings\n"
-        "Other commands (only game creator):\n"
-        "/close - Close lobby\n"
-        "/open - Open lobby\n"
-        "/kill - Terminate the game\n"
-        "/kick - Select a player to kick "
-        "by replying to him or her\n"
-        "/enable_translations - Translate relevant texts into all "
-        "languages spoken in a game\n"
-        "/disable_translations - Use English for those texts\n\n"
-        "<b>Experimental:</b> Play in multiple groups at the same time. "
-        "Press the <code>Current game: ...</code> button and select the "
-        "group you want to play a card in.\n"
-        "If you enjoy this bot, join the "
-        '<a href="https://t.me/UnuRobotUpdates">update channel</a>'
-        " and buy an UNO card game."
+        "4. Tipo <code>@Makoto_xyz_bot</code> na sua caixa de bate-papo e clique em "
+        "<b>espaço</b>, ou clique no botão <code>via @Makoto_xyz_bot</code> texto "
+        "ao lado de mensagens. Você verá seus cartões (alguns acinzentados), "
+        "quaisquer opções extras, como desenho, e um <b>?</b> para ver o "
+        "estado atual do jogo. O <b>cartões acinzentados</b> são aqueles que você "
+        "<b>não pode jogar</b> no momento. Toque em uma opção para executar "
+        "a ação selecionada.\n"
+        "Os jogadores podem participar do jogo a qualquer momento. Para sair de um jogo, "
+        "use /leave. Se um jogador demorar mais de 90 segundos a jogar, "
+        "você pode usar /skip para pular esse jogador. Usar /notify_me para "
+        "receber uma mensagem privada quando um novo jogo é iniciado.\n\n"
+        "<b>Idiomas</b> e outras configurações: /settings\n"
+        "Outros comandos (Só utilizado quem cria a partida ou o administrador do bot):\n"
+        "/close - Fechar lobby\n"
+        "/open - Lobby aberto\n"
+        "/kill - Encerrar o jogo\n"
+        "/kick - Selecione um jogador para chutar "
+        "respondendo-lhe\n"
+        "/enable_translations - Traduzir textos relevantes em todos "
+        "idiomas falados em um jogo\n"
+        "/disable_translations - Use o inglês para esses textos\n\n"
+        "<b>Experimental:</b> Jogue em vários grupos ao mesmo tempo. "
+        "Pressione o botão <code>Jogo atual: ...</code> e selecione o botão "
+        "grupo no qual você deseja jogar uma carta.\n"
+        "Se você gosta deste bot, junte-se ao "
+        '<a href="https://t.me/botssaved">canal de atualização</a>'
+        " e se divertir com o bot de cartas UNO."
     )
 
     await send_async(
@@ -76,15 +76,15 @@ async def help_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def modes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler for the /help command"""
     modes_explanation = _(
-        "This UNO bot has five game modes: Classic, Sanic, Wild, Text and 7-0.\n\n"
-        " 🎻 The Classic mode uses the conventional UNO deck and there is no auto skip.\n"
-        " 🚀 The Sanic mode uses the conventional UNO deck and the bot automatically skips a player if he/she takes too long to play its turn\n"
-        " 🐉 The Wild mode uses a deck with more special cards, less number variety and no auto skip.\n"
-        " ✍️ The Text mode uses the conventional UNO deck but instead of stickers it uses the text.\n"
-        " 🔫 The 7-0 mode uses the conventional UNO deck but when a player plays a 7, he/she can choose a player to swap cards with."
-        " When a player plays a 0, all cards will be swapped between the current players.\n\n"
-        "To change the game mode, the GAME CREATOR has to type the bot nickname and a space, "
-        "just like when playing a card, and all gamemode options should appear."
+        "Este bot UNO tem cinco modos de jogo: Clássico, Sanic, Wild, Texto e 7-0.\n\n"
+        " 🎻 O modo Classic usa o deck UNO convencional e não há salto automático.\n"
+        " 🚀 O modo Sanic usa o baralho UNO convencional e o bot ignora automaticamente um jogador se ele demorar muito para jogar sua vez.\n"
+        " 🐉 O modo Wild usa um baralho com mais cartas especiais, menos variedade de números e nenhum salto automático.\n"
+        " ✍️ O modo Texto usa o deck UNO convencional, mas em vez de adesivos ele usa o texto.\n"
+        " 🔫 O 7-0 modo usa o baralho UNO convencional, mas quando um jogador joga um 7, ele / ela pode escolher um jogador para trocar cartas com."
+        " Quando um jogador joga um 0, todas as cartas serão trocadas entre os jogadores atuais.\n\n"
+        "Para alterar o modo de jogo, o CRIADOR do JOGO tem que digitar o apelido do bot e um espaço, "
+        "assim como ao jogar uma carta, e todas as opções de modo de jogo devem aparecer."
     )
     await send_async(
         update.message.chat,
@@ -99,18 +99,18 @@ async def modes(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def source(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler for the /help command"""
     source_text = _(
-        "This bot is Free Software and licensed under the AGPL. "
-        "The code is available here: \n"
-        "https://github.com/AmanoTeam/UnuRobot"
+        "Este bot é Software Livre e licenciado sob a AGPL. "
+        "É sobre isso: \n"
+        "https://t.me/botssaved"
     )
     attributions = _(
-        "Attributions:\n"
-        "Draw icon by "
+        "Atribuições:\n"
+        "Ícone de desenho por "
         '<a href="http://www.faithtoken.com/">Faithtoken</a>\n'
-        "Pass icon by "
+        "Ícone de passagem por "
         '<a href="http://delapouite.com/">Delapouite</a>\n'
-        "Originals available on http://game-icons.net\n"
-        "Icons edited by ɳick"
+        "Originais disponíveis em http://game-icons.net\n"
+        "Ícones editados por ɳick"
     )
 
     await send_async(
@@ -127,7 +127,7 @@ async def news(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler for the /news command"""
     await send_async(
         update.message.chat,
-        text=_("All news here: https://t.me/UnuRobotUpdates"),
+        text=_("Todas as notícias aqui: https://t.me/botssaved"),
         message_thread_id=update.message.message_thread_id,
         disable_web_page_preview=True,
     )
@@ -142,30 +142,30 @@ async def stats(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_async(
             chat,
             text=_(
-                "You did not enable statistics. Use /settings in "
-                "a private chat with the bot to enable them."
+                "Você não habilitou estatísticas. Use /settings em "
+                "um bate-papo privado com o bot para habilitá-los."
             ),
             message_thread_id=update.message.message_thread_id,
         )
     else:
         n = us.games_played
         stats_text = [
-            _("{number} game played", "{number} games played", n).format(number=n)
+            _("{number} jogo jogado", "{number} jogos jogados", n).format(number=n)
         ]
 
         n = us.first_places
         m = round((us.first_places / us.games_played) * 100) if us.games_played else 0
         stats_text.append(
             _(
-                "{number} first place ({percent}%)",
-                "{number} first places ({percent}%)",
+                "{number} primeiro lugar ({percent}%)",
+                "{number} primeiros lugares ({percent}%)",
                 n,
             ).format(number=n, percent=m)
         )
 
         n = us.cards_played
         stats_text.append(
-            _("{number} card played", "{number} cards played", n).format(number=n)
+            _("{number} cartas jogadas", "{number} cartas jogadas", n).format(number=n)
         )
 
         await send_async(
