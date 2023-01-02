@@ -96,8 +96,8 @@ async def notify_me(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_async(
             chat,
             text=_(
-                "Send this command in a group to be notified "
-                "when a new game is started there."
+                "Enviar este comando em um grupo para ser notificado "
+                "quando um novo jogo é iniciado lá."
             ),
             message_thread_id=update.message.message_thread_id,
         )
@@ -110,9 +110,9 @@ async def notify_me(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_async(
             chat,
             text=_(
-                "Okay, you will be notified in a private message "
-                "when the next game is started in this chat. "
-                "Make sure that I'm allowed to send you messages."
+                "Okay, você será notificado em uma mensagem privada "
+                "quando o próximo jogo é iniciado neste bate-papo. "
+                "Certifique-se de que tenho permissão para enviar mensagens a você."
             ),
             message_thread_id=update.message.message_thread_id,
         )
@@ -131,7 +131,7 @@ async def new_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
             for user in gm.remind_dict[update.message.chat_id]:
                 await send_async(
                     user,
-                    text=_("A new game has been started in {title}").format(
+                    text=_("Um novo jogo foi iniciado em {title}").format(
                         title=update.message.chat.title
                     ),
                 )
@@ -145,8 +145,8 @@ async def new_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_async(
             game,
             text=_(
-                "Created a new game! Join the game with /join "
-                "and start the game with /start"
+                "Criou um novo jogo! Junte-se ao jogo com /join "
+                "e comece o jogo com /start"
             ),
         )
 
@@ -165,7 +165,7 @@ async def kill_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not games:
         await send_async(
             chat,
-            text=_("There is no running game in this chat."),
+            text=_("Não há nenhum jogo neste bate-papo."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -176,14 +176,14 @@ async def kill_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         try:
             gm.end_game(chat, user)
-            await send_async(game, text=__("Game ended!", multi=game.translate))
+            await send_async(game, text=__("Jogo encerrado!", multi=game.translate))
 
         except NoGameInChatError:
             await send_async(
                 game,
                 text=_(
-                    "The game is not started yet. "
-                    "Join the game with /join and start the game with /start"
+                    "O jogo ainda não começou. "
+                    "Junte-se ao jogo com /join e comece o jogo com /start"
                 ),
                 reply_to_message_id=update.message.message_id,
             )
@@ -191,7 +191,7 @@ async def kill_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await send_async(
             game,
-            text=_("Only the game creator ({name}) and admin can do that.").format(
+            text=_("Apenas o criador do jogo ({name}) e o administrador pode fazer isso.").format(
                 name=game.starter.first_name
             ),
             reply_to_message_id=update.message.message_id,
@@ -213,14 +213,14 @@ async def join_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except LobbyClosedError:
         await send_async(
             chat,
-            text=_("The lobby is closed"),
+            text=_("O lobby está fechado"),
             message_thread_id=update.message.message_thread_id,
         )
 
     except NoGameInChatError:
         await send_async(
             chat,
-            text=_("No game is running at the moment. " "Create a new game with /new"),
+            text=_("Nenhum jogo está em execução no momento. " "Crie um novo jogo com /new"),
             message_thread_id=update.message.message_thread_id,
             reply_to_message_id=update.message.message_id,
         )
@@ -228,7 +228,7 @@ async def join_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except AlreadyJoinedError:
         await send_async(
             chat,
-            text=_("You already joined the game. Start the game " "with /start"),
+            text=_("Você já entrou no jogo. Iniciar o jogo " "com /start"),
             message_thread_id=update.message.message_thread_id,
             reply_to_message_id=update.message.message_id,
         )
@@ -237,8 +237,8 @@ async def join_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_async(
             chat,
             text=_(
-                "There are not enough cards left in the deck for "
-                "new players to join."
+                "Não há cartas suficientes no baralho para "
+                "novos jogadores para se juntarem."
             ),
             message_thread_id=update.message.message_thread_id,
             reply_to_message_id=update.message.message_id,
@@ -247,7 +247,7 @@ async def join_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await send_async(
             chat,
-            text=_("Joined the game"),
+            text=_("Entrou para o jogo"),
             message_thread_id=update.message.message_thread_id,
             reply_to_message_id=update.message.message_id,
         )
@@ -264,7 +264,7 @@ async def leave_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if player is None:
         await send_async(
             chat,
-            text=_("You are not playing in a game in " "this group."),
+            text=_("Você não está jogando em um jogo em " "neste grupo."),
             message_thread_id=update.message.message_thread_id,
             reply_to_message_id=update.message.message_id,
         )
@@ -279,19 +279,19 @@ async def leave_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except NoGameInChatError:
         await send_async(
             game,
-            text=_("You are not playing in a game in " "this group."),
+            text=_("Você não está jogando em um jogo em " "neste grupo."),
             reply_to_message_id=update.message.message_id,
         )
 
     except NotEnoughPlayersError:
         gm.end_game(chat, user)
-        await send_async(game, text=__("Game ended!", multi=game.translate))
+        await send_async(game, text=__("Jogo encerrado!", multi=game.translate))
 
     else:
         if game.started:
             await send_async(
                 game,
-                text=__("Okay. Next Player: {name}", multi=game.translate).format(
+                text=__("Okay. Próximo Jogador: {name}", multi=game.translate).format(
                     name=display_name(game.current_player.user)
                 ),
                 reply_to_message_id=update.message.message_id,
@@ -300,7 +300,7 @@ async def leave_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await send_async(
                 game,
                 text=__(
-                    "{name} left the game before it started.", multi=game.translate
+                    "{name} deixou o jogo antes de começar.", multi=game.translate
                 ).format(name=display_name(user)),
                 reply_to_message_id=update.message.message_id,
             )
@@ -323,7 +323,7 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except (KeyError, IndexError):
         await send_async(
             chat,
-            text=_("No game is running at the moment. " "Create a new game with /new"),
+            text=_("Nenhum jogo está em execução no momento. " "Crie um novo jogo com /new"),
             message_thread_id=update.message.message_thread_id,
             reply_to_message_id=update.message.message_id,
         )
@@ -333,8 +333,8 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await send_async(
             game,
             text=_(
-                "The game is not started yet. "
-                "Join the game with /join and start the game with /start"
+                "O jogo ainda não começou. "
+                "Junte-se ao jogo com /join e comece o jogo com /start"
             ),
             reply_to_message_id=update.message.message_id,
         )
@@ -352,7 +352,7 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await send_async(
                     game,
                     text=_(
-                        "Player {name} is not found in the current game.".format(
+                        "Jogador {name} não é encontrado no jogo atual.".format(
                             name=display_name(kicked)
                         )
                     ),
@@ -365,18 +365,18 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await send_async(
                     game,
                     text=_(
-                        "{0} was kicked by {1}".format(
+                        "{0} foi chutado por {1}".format(
                             display_name(kicked), display_name(user)
                         )
                     ),
                 )
-                await send_async(game, text=__("Game ended!", multi=game.translate))
+                await send_async(game, text=__("Jogo encerrado!", multi=game.translate))
                 return
 
             await send_async(
                 game,
                 text=_(
-                    "{0} was kicked by {1}".format(
+                    "{0} foi chutado por {1}".format(
                         display_name(kicked), display_name(user)
                     )
                 ),
@@ -386,7 +386,7 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await send_async(
                 game,
                 text=_(
-                    "Please reply to the person you want to kick and type /kick again."
+                    "Por favor, responda à pessoa que você deseja botar pra kitar e digite /kick outra vez."
                 ),
                 reply_to_message_id=update.message.message_id,
             )
@@ -394,7 +394,7 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await send_async(
             game,
-            text=__("Okay. Next Player: {name}", multi=game.translate).format(
+            text=__("Okay. Próximo Jogador: {name}", multi=game.translate).format(
                 name=display_name(game.current_player.user)
             ),
             reply_to_message_id=update.message.message_id,
@@ -403,7 +403,7 @@ async def kick_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await send_async(
             game,
-            text=_("Only the game creator ({name}) and admin can do that.").format(
+            text=_("Apenas o criador do jogo ({name}) e o administrador pode fazer isso.").format(
                 name=game.starter.first_name
             ),
             reply_to_message_id=update.message.message_id,
@@ -423,18 +423,18 @@ async def select_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await send_async(
             update.callback_query.message.chat,
-            text=_("Game not found."),
+            text=_("Jogo não encontrado."),
             message_thread_id=update.message.message_thread_id,
         )
         return
 
     async def selected(bot):
         back = [
-            [InlineKeyboardButton(text=_("Back to last group"), switch_inline_query="")]
+            [InlineKeyboardButton(text=_("Voltar ao último grupo"), switch_inline_query="")]
         ]
         await context.bot.answerCallbackQuery(
             update.callback_query.id,
-            text=_("Please switch to the group you selected!"),
+            text=_("Mude para o grupo selecionado!"),
             show_alert=False,
         )
 
@@ -442,9 +442,9 @@ async def select_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chat_id=update.callback_query.message.chat_id,
             message_id=update.callback_query.message.message_id,
             text=_(
-                "Selected group: {group}\n"
-                "<b>Make sure that you switch to the correct "
-                "group!</b>"
+                "Grupo selecionado: {group}\n"
+                "<b>Certifique-se de que muda para o correto "
+                "grupo!</b>"
             ).format(group=gm.userid_current[user_id].game.chat.title),
             reply_markup=InlineKeyboardMarkup(back),
             parse_mode=ParseMode.HTML,
@@ -470,13 +470,13 @@ async def status_update(update: Update, context: ContextTypes.DEFAULT_TYPE):
         gm.end_game(chat, user)
         await send_async(
             chat,
-            text=__("Game ended!", multi=game.translate),
+            text=__("Jogo encerrado!", multi=game.translate),
             message_thread_id=update.message.message_thread_id,
         )
     else:
         await send_async(
             game,
-            text=__("Removing {name} from the game", multi=game.translate).format(
+            text=__("Removeu {name} do jogo", multi=game.translate).format(
                 name=display_name(user)
             ),
         )
@@ -498,21 +498,21 @@ async def start_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await send_async(
                 chat,
                 text=_(
-                    "There is no game running in this chat. Create "
-                    "a new one with /new"
+                    "Não há nenhum jogo em execução neste bate-papo. Criar "
+                    "um novo com /new"
                 ),
             )
             return
 
         if game.started:
-            await send_async(game, text=_("The game has already started"))
+            await send_async(game, text=_("O jogo já começou"))
 
         elif len(game.players) < MIN_PLAYERS:
             await send_async(
                 game,
                 text=__(
-                    "At least {minplayers} players must /join the game "
-                    "before you can start it"
+                    "Pelo menos {minplayers} os jogadores devem apertar /join pra jogar o jogo "
+                    "antes que você possa iniciá-lo"
                 ).format(minplayers=MIN_PLAYERS),
             )
 
@@ -525,14 +525,14 @@ async def start_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
             choice = [
                 [
                     InlineKeyboardButton(
-                        text=_("Make your choice!"), switch_inline_query_current_chat=""
+                        text=_("Faça a sua escolha!"), switch_inline_query_current_chat=""
                     )
                 ]
             ]
             first_message = __(
-                "First player: {name}\n"
-                "Use /close to stop people from joining the game.\n"
-                "Enable multi-translations with /enable_translations",
+                "Primeiro jogador: {name}\n"
+                "Use /close para impedir que as pessoas entrem no jogo.\n"
+                "Habilite multitraduções com /enable_translations",
                 multi=game.translate,
             ).format(name=display_name(game.current_player.user))
 
@@ -574,7 +574,7 @@ async def start_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
         await send_async(
             game,
-            text=_("Please select the group you want to play in."),
+            text=_("Por favor, selecione o grupo em que você quer jogar."),
             reply_markup=InlineKeyboardMarkup(groups),
         )
 
@@ -592,7 +592,7 @@ async def close_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not games:
         await send_async(
             chat,
-            text=_("There is no running game in this chat."),
+            text=_("Não há nenhum jogo neste bate-papo."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -603,12 +603,12 @@ async def close_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
         game.open = False
         await send_async(
             game,
-            text=_("Closed the lobby. " "No more players can join this game."),
+            text=_("Fechado o lobby. " "Não há mais jogadores que possam participar deste jogo."),
         )
     else:
         await send_async(
             game,
-            text=_("Only the game creator ({name}) and admin can do that.").format(
+            text=_("Apenas o criador do jogo ({name}) e o administrador pode fazer isso.").format(
                 name=game.starter.first_name
             ),
             reply_to_message_id=update.message.message_id,
@@ -627,7 +627,7 @@ async def open_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not games:
         await send_async(
             chat,
-            text=_("There is no running game in this chat."),
+            text=_("Não há nenhum jogo de corrida neste bate-papo."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -638,12 +638,12 @@ async def open_game(update: Update, context: ContextTypes.DEFAULT_TYPE):
         game.open = True
         await send_async(
             game,
-            text=_("Opened the lobby. " "New players may /join the game."),
+            text=_("Aberto o lobby. " "Novos jogadores podem usar /join para entrar no jogo."),
         )
     else:
         await send_async(
             game,
-            text=_("Only the game creator ({name}) and admin can do that.").format(
+            text=_("Apenas o criador do jogo ({name}) e o administrador pode fazer isso.").format(
                 name=game.starter.first_name
             ),
             reply_to_message_id=update.message.message_id,
@@ -662,7 +662,7 @@ async def enable_translations(update: Update, context: ContextTypes.DEFAULT_TYPE
     if not games:
         await send_async(
             chat,
-            text=_("There is no running game in this chat."),
+            text=_("Não há nenhum jogo neste bate-papo."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -673,12 +673,12 @@ async def enable_translations(update: Update, context: ContextTypes.DEFAULT_TYPE
         game.translate = True
         await send_async(
             game,
-            text=_("Enabled multi-translations. " "Disable with /disable_translations"),
+            text=_("Multitraduções habilitadas. " "Desativar com /disable_translations"),
         )
     else:
         await send_async(
             game,
-            text=_("Only the game creator ({name}) and admin can do that.").format(
+            text=_("Apenas o criador do jogo ({name}) e o administrador pode fazer isso.").format(
                 name=game.starter.first_name
             ),
             reply_to_message_id=update.message.message_id,
@@ -697,7 +697,7 @@ async def disable_translations(update: Update, context: ContextTypes.DEFAULT_TYP
     if not games:
         await send_async(
             chat,
-            text=_("There is no running game in this chat."),
+            text=_("Não há nenhum jogo neste bate-papo."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -709,15 +709,15 @@ async def disable_translations(update: Update, context: ContextTypes.DEFAULT_TYP
         await send_async(
             game,
             text=_(
-                "Disabled multi-translations. "
-                "Enable them again with "
+                "Multitraduções desativadas. "
+                "Habilite-os novamente com "
                 "/enable_translations"
             ),
         )
     else:
         await send_async(
             game,
-            text=_("Only the game creator ({name}) and admin can do that.").format(
+            text=_("Apenas o criador do jogo ({name}) e o administrador pode fazer isso.").format(
                 name=game.starter.first_name
             ),
             reply_to_message_id=update.message.message_id,
@@ -737,7 +737,7 @@ async def skip_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not player:
         await send_async(
             chat,
-            text=_("You are not playing in a game in this chat."),
+            text=_("Você não está jogando em um jogo neste bate-papo."),
             message_thread_id=update.message.message_thread_id,
         )
         return
@@ -755,7 +755,7 @@ async def skip_player(update: Update, context: ContextTypes.DEFAULT_TYPE):
         n = skipped_player.waiting_time - delta
         await send_async(
             game,
-            text=_("Please wait {time} second", "Please wait {time} seconds", n).format(
+            text=_("Aguarde {time} Segundo", "Aguarde {time} Segundos", n).format(
                 time=n
             ),
             reply_to_message_id=update.message.message_id,
@@ -874,14 +874,14 @@ async def process_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         mode = result_id[5:]
         game.set_mode(mode)
         logger.info("Gamemode changed to %s", mode)
-        await send_async(game, text=__("Gamemode changed to {mode}".format(mode=mode)))
+        await send_async(game, text=__("Modo de jogo alterado para {mode}".format(mode=mode)))
         return
     elif len(result_id) == 36:  # UUID result
         return
     elif int(anti_cheat) != last_anti_cheat:
         await send_async(
             game,
-            text=__("Cheat attempt by {name}", multi=game.translate).format(
+            text=__("Tentativa de trapaça por {name}", multi=game.translate).format(
                 name=display_name(player.user)
             ),
         )
@@ -922,13 +922,13 @@ async def process_result(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await do_play_card(context, player, result_id)
 
     if game_is_running(game):
-        nextplayer_message = __("Next player: {name}", multi=game.translate).format(
+        nextplayer_message = __("Próximo jogador: {name}", multi=game.translate).format(
             name=display_name(game.current_player.user)
         )
         choice = [
             [
                 InlineKeyboardButton(
-                    text=_("Make your choice!"), switch_inline_query_current_chat=""
+                    text=_("Faça a sua escolha!"), switch_inline_query_current_chat=""
                 )
             ]
         ]
@@ -948,7 +948,7 @@ async def reset_waiting_time(context, player):
         await send_async(
             player.game.thread_id,
             text=__(
-                "Waiting time for {name} has been reset to {time} " "seconds",
+                "Tempo de espera para {name} foi redefinido para {time} " "Segundos",
                 multi=player.game.translate,
             ).format(name=display_name(player.user), time=WAITING_TIME),
         )
