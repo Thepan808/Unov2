@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:alpine3.4
 
 RUN apk add --no-cache gettext
 
